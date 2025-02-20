@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/join.css')}}"> 
+</head>
+<body>
+    <nav>
+        <div class="logo">
+        <a href="/">로고</a>
+    </div>
+    <div class="nav-buttons">
+        <a href="/auth/join" class="btn">회원가입</a>
+        <a href="/auth/login" class="btn">로그인</a>
+    </div>    
+    </nav>
+
+    <div class="container">
+        <h1>회원가입</h1>
+        <form action="/auth/join" method="POST">
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" required minlength="2" maxlength="7">
+            </div>
+
+            <div class="form-group">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname" required minlength="2" maxlength="10">
+            </div>
+
+            <div class="form-group">
+                <label for="username">아이디</label>
+                <input type="text" id="username" name="username" required minlength="7" maxlength="20">
+            </div>
+
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required minlength="7" maxlength="20">
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group gender-group">
+                <label for="male">성별</label>
+                <label for="male">남</label>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="female">여</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="submit-btn">회원가입</button>
+                <a href="/auth/login" class="login-btn">로그인</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{url_for('static', filename='js/join.js')}}"></script>
+</body>
+</html>
