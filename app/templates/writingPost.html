@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{writing.id}}님의 OOTD</title>
+</head>
+<body> 
+    <p><a href="/writing/create">새 글 추가</a></p>
+    <div class = "writing">
+        <h2><span>{{weather}}</span>{{date}}<span></span><span>{{time}}</span></h2>
+        
+        <p>{{writing.content}}</p>
+        
+        {% if post,imege_url %}
+        <img src = "{{post.image_url}}" alt = "게시글 이미지" width = "500">
+        {% end if %}
+
+        <P>코멘트</P>
+        <p>tag</p>
+
+        <h3>댓글</h3>
+        <form action="/post/{{post.id}}/comment"
+        method="POST"
+            <textarea name="content" required></textarea><br><button type="submit">댓글 작성</button>
+        </form>
+        
+        <ul>
+            {% for  comment in post.comments %}
+                <li>{{comment.content}}</li>
+            {% endfor %}    
+        </ul>
+
+        <a href="/writing/update/{{writing.id}}">수정</a>
+        <a href="/writing/delete/{{wrting.id}}">삭제</a>
+
+        <a href="/">메인 페이지로</a>
+    </div>
+</body>
+</html>
