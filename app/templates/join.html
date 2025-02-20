@@ -18,7 +18,7 @@
 
     <div class="container">
         <h1>회원가입</h1>
-        <form action="/auth/join" method="POST">
+        <form action="{{ url_for('auth.join') }}" method="POST">
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" id="name" name="name" required minlength="2" maxlength="7">

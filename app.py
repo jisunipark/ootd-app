@@ -4,8 +4,7 @@
 from flask import Flask, render_template
 import requests
 
-app = Flask(__name__,template_folder="app/templates") #Flask 객체 생성 
-app = Flask(__name__, static_folder='app/static', template_folder='app/templates')
+app = Flask(__name__, template_folder="app/templates", static_folder="static") #Flask 객체 생성 
 
 
 #OpenWeatherMap API키
@@ -41,9 +40,9 @@ def index(): #메인 페이지 렌더링하는 함수
 
     return render_template("index.html", weather=weather_info)
 
-@app.route('/join')
-def join():
-    return render_template("join.html")
+
+from app import app
 
 if __name__ == "__main__":
     app.run(debug=True)
+
