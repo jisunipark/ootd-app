@@ -14,7 +14,7 @@
         <h2 style="display: inline-block; margin-right: 40px;">{{writing.id}}'s OOTD</h2>
       </span>
       <span>
-        <h4 style="display: inline-block; float: right;">
+        <h4 style="float: right;">
           <span>{{writing.weather}}</span><span>{{writing.date}}</span><span>{{writing.time}}</span>
         </h4>
       </span>
@@ -57,9 +57,95 @@
 
       <a href="/writing/update/{{writing.id}}">수정</a>
       <a href="/writing/delete/{{writing.id}}">삭제</a>
-
       <a href="/">메인 페이지로</a>
     </div>
   </body>
 </html>
 
+
+
+  
+
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ writing.id if writing else '새 글 작성' }}</title>
+  </head>
+
+  <body>
+    <p style="text-align: right;">
+      <a href="/">메인 페이지로</a>
+    </p>
+
+    <div class="writing">
+      {% if writing %}
+        <!-- 작성된 글을 보여주는 부분 -->
+        <span>
+          <h2 style="display: inline-block; margin-right: 40px;">{{ writing.id }}'s OOTD</h2>
+        </span>
+        <span>
+          <h4 style="float: right;">
+            <span>{{ writing.weather }}</span><span>{{ writing.date }}</span><span>{{ writing.time }}</span>
+          </h4>
+        </span>
+
+        <p>{{ writing.content }}</p>
+
+        {% if writing.image_url %}
+          <img src="{{ writing.image_url }}" alt="게시글 이미지" width="500" />
+        {% endif %}
+        <br><br>
+
+        <p><strong>태그:</strong>
+          {% for tag in writing.tags %}
+            <span>#{{ tag }} </span>
+          {% endfor %}
+        </p>
+
+        <br><br>
+        <h3>shout out to {{ writing.id }}'s OOTD</h3>
+        <form action="/post/{{ writing.id }}/comment" method="POST">
+          <textarea name="content" required></textarea><br />
+          <button type="submit">댓글 작성</button>
+        </form>
+
+        <ul>
+          {% for comment in writing.comments %}
+            <li>{{ comment.content }}</li>
+          {% endfor %}
+        </ul>
+
+        <a href="/writing/update/{{ writing.id }}">수정</a>
+        <a href="/writing/delete/{{ writing.id }}">삭제</a>
+
+      {% else %}
+        <!-- 새 글 작성 폼을 보여주는 부분 -->
+        <h1>새 글 작성</h1>
+        <form method="POST">
+          <label for="weather">날씨:</label><br>
+          <input type="text" id="weather" name="weather" required><br><br>
+
+          <label for="date">날짜:</label><br>
+          <input type="text" id="date" name="date" required><br><br>
+
+          <label for="time">시간:</label><br>
+          <input type="text" id="time" name="time" required><br><br>
+
+          <label for="content">내용:</label><br>
+          <textarea id="content" name="content" required></textarea><br><br>
+
+          <label for="image_url">이미지 URL:</label><br>
+          <input type="text" id="image_url" name="image_url"><br><br>
+
+          <label for="tags">태그:</label><br>
+          <input type="text" id="tags" name="tags"><br><br>
+
+          <button type="submit">저장</button>
+        </form>
+      {% endif %}
+    </div>
+  </body>
+</html>
