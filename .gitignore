@@ -1,7 +1,6 @@
-# Git에 포함하지 않을 파일/폴더 지정
-
+__pycache__/
 *.pyc
 *.pyo
-__pycache__/
+
 
 /instance/users.db
