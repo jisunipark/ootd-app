@@ -1,0 +1,66 @@
+/* logout.css */
+
+/* 기본 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* 로그아웃 컨테이너 */
+.logout-container {
+  width: 400px;
+  margin: 100px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 로그아웃 메시지 스타일 */
+.logout-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.logout-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.logout-links a {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+/* 버튼 색상 */
+.logout-links .login-btn {
+  background-color: #0095f6;
+}
+
+.logout-links .login-btn:hover {
+  background-color: #0078d4;
+}
+
+.logout-links .home-btn {
+  background-color: #4caf50;
+}
+
+.logout-links .home-btn:hover {
+  background-color: #388e3c;
+}
