@@ -43,7 +43,6 @@ def index(): #메인 페이지 렌더링하는 함수
     return render_template("index.html", weather=weather_info)
 
 
-
 # 글 작성 라우트
 @main.route("/writing", methods=["GET", "POST"])
 def writing():
