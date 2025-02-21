@@ -15,8 +15,11 @@ app.secret_key = 'your_secret_key_here'
 db = SQLAlchemy(app)
 
 # 블루프린트 등록
-from app.auth.routes import auth as auth_blueprint
-app.register_blueprint(auth_blueprint, url_prefix='/auth')
+from app.auth.routes import auth as auth_blueprint 
+from app.main.routes import main as main_blueprint
+
+app.register_blueprint(auth_blueprint, url_prefix='/auth') # 회원가입/로그인 기능
+app.register_blueprint(main_blueprint) # 메인 페이지 기능
 
 # 테이블 자동 생성
 with app.app_context():
