@@ -15,8 +15,8 @@ class User(db.Model):
 class Writing(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     weather = db.Column(db.String(50))
-    date = db.Column(db.String(20))
-    time = db.Column(db.String(20))
+    date =  db.Column(db.String(10), nullable=False)  # 날짜 (YYYY-MM-DD)
+    time = db.Column(db.String(5), nullable=False)  # 시간 (HH:MM)
     content = db.Column(db.Text)
     image_url = db.Column(db.String(200))
     tags = db.Column(db.String(200))

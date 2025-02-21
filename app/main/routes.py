@@ -5,6 +5,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 import requests
 from app import db
 from app.models import Writing, Comment
+from datetime import datetime
 
 # 블루프린트 객체 생성
 main = Blueprint('main',__name__)
@@ -48,13 +49,24 @@ def index(): #메인 페이지 렌더링하는 함수
 def writing():
     if request.method == "POST":
         # 사용자가 입력한 데이터를 가져옵니다.
+        weather = request.form["weather"]
+        content = request.form["content"]
+        image_url = request.form.get("image_url", "")
+        tags = request.form.get("tags", "")
+
+        # 현재 날짜와 시간을 자동으로 가져옵니다.
+        now = datetime.now()
+        date = now.strftime('%Y-%m-%d')  # 현재 날짜
+        time = now.strftime('%H:%M')  # 현재 시간
+
+        # 새로운 글 객체 생성
         new_writing = Writing(
-            weather=request.form["weather"],
-            date=request.form["date"],
-            time=request.form["time"],
-            content=request.form["content"],
-            image_url=request.form.get("image_url", ""),
-            tags=request.form.get("tags", "")
+            weather=weather,
+            date=date,
+            time=time,
+            content=content,
+            image_url=image_url,
+            tags=tags
         )
 
         # 데이터베이스에 저장
