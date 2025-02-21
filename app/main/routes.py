@@ -61,8 +61,11 @@ def index(): #메인 페이지 렌더링하는 함수
             weather_info["error"] = f"❌ API 오류: {data.get('message', '알 수 없음')}"
     except Exception as e:
         weather_info["error"] = f"🚨 API 요청 중 오류 발생: {e}" 
+    
+    # 모든 작성된 글 가져오기 (최신순)
+    all_posts = Writing.query.order_by(Writing.id.desc()).all()
 
-    return render_template("index.html", weather=weather_info)
+    return render_template("index.html", weather=weather_info,writings=all_posts)
 
 
 # 글 작성 라우트
