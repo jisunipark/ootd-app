@@ -26,9 +26,10 @@
         <p>{{ writing.content }}</p>
 
         {% if writing.image_url %}
-          <img src="{{ writing.image_url }}" alt="게시글 이미지" width="500" />
-        {% endif %}
-        <br><br>
+        <!-- 이미지 URL이 있는 경우 이미지 표시 -->
+        <img src="{{ url_for('static', filename='uploads/' + writing.image_url.split('/')[-1]) }}" alt="게시글 이미지" width="500" />
+      {% endif %}
+      <br><br>
 
         <p><strong>태그:</strong>
           {% for tag in writing.tags %}
@@ -57,13 +58,14 @@
         <h1>Make My OOTD</h1>
         <form method="POST">
           <label for="weather">날씨:</label><br>
-          <input type="text" id="weather" name="weather" required><br><br>
+          <input type="text" id="weather" name="weather" value="{{ weather_info['description'] if weather_info['description'] else '' }}" required><br><br>
+
 
           <label for="content">내용:</label><br>
           <textarea id="content" name="content" required></textarea><br><br>
 
-          <label for="image_url">이미지 URL:</label><br>
-          <input type="text" id="image_url" name="image_url"><br><br>
+          <label for="image_url">이미지 파일:</label><br>
+          <input type="file" id="image_url" name="image_url"><br><br>
 
           <label for="tags">태그:</label><br>
           <input type="text" id="tags" name="tags"><br><br>
