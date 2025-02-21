@@ -12,7 +12,7 @@ body {
   background-color: #f4f4f4;
   color: #333;
   line-height: 1.6;
-  padding: 20px;
+  padding: 0;
   overflow: hidden; /* 스크롤바 제거 */
   height: 100vh; /* 화면 높이 전체 사용 */
 }

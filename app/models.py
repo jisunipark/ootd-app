@@ -20,10 +20,8 @@ class Writing(db.Model):
     content = db.Column(db.Text)
     image_url = db.Column(db.String(200))
     tags = db.Column(db.String(200))
-    
-    # 댓글과 관계 설정
-    comments = db.relationship('Comment', backref='writing', lazy=True)
 
+    comments = db.relationship('Comment', lazy=True)
 
     def __repr__(self):
         return f"<Writing {self.id}>"
@@ -37,6 +35,9 @@ class Comment(db.Model):
     content = db.Column(db.Text)
     writing = db.relationship('Writing', backref=db.backref('comments', lazy=True))
     user = db.relationship('User', backref=db.backref('comments', lazy=True))  # User와의 관계
+
+    writing = db.relationship('Writing', lazy=True)
+    user = db.relationship('User', lazy=True)
 
     def __repr__(self):
         return f"<Comment {self.user.username}>"  
