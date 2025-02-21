@@ -1,10 +1,11 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 # SQLite 데이터베이스 설정 (db.sqlite3라는 파일로 저장)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance_path, 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # SQLAlchemy 객체 생성
@@ -24,6 +25,18 @@ class Writing(db.Model):
     def __repr__(self):
         return f"<Writing {self.id}>"
 
+# Comment 모델 정의   
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    writing_id = db.Column(db.Integer, db.ForeignKey('writing.id'), nullable=False)
+    content = db.Column(db.Text)
+    writing = db.relationship('Writing', backref=db.backref('comments', lazy=True))
+
+    def __repr__(self):
+        return f"<Comment {self.id}>"
+
+
+
 # 데이터베이스 초기화
 with app.app_context():
     db.create_all()    # 테이블을 생성
@@ -38,9 +51,9 @@ def writing():
             time=request.form["time"],
             content=request.form["content"],
             image_url=request.form.get("image_url", ""),
-            tags=request.form.get("tags", ""),
-            comments=""  # 댓글은 빈 값으로 시작
+            tags=request.form.get("tags", "")
         )
+        
         
         # 데이터베이스에 저장
         db.session.add(new_writing)
@@ -62,8 +75,17 @@ def show_writing(writing_id):
 def add_comment(writing_id):
     writing = Writing.query.get_or_404(writing_id)
     comment_content = request.form['content']
-    writing.comments += f"\n{comment_content}"  # 댓글 추가
+    
+    # 새로운 댓글을 Comment 테이블에 추가
+    new_comment = Comment(
+        writing_id=writing.id,
+        content=comment_content
+    )
+    
+    # 댓글을 데이터베이스에 저장
+    db.session.add(new_comment)
     db.session.commit()
+    
     return redirect(url_for('show_writing', writing_id=writing.id))
 
 # 플라스트 앱 직접 실행
