@@ -1,130 +1,131 @@
-/* 전체 스타일 */
-body {
-  font-family: Arial, sans-serif;
+
+/* Reset 기본 스타일 */
+* {
   margin: 0;
   padding: 0;
-  background-color: #f8f8f8;
-}
-
-nav {
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav .logo a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-}
-
-nav .nav-buttons a {
-  color: white;
-  text-decoration: none;
-  margin-left: 10px;
-  padding: 5px 10px;
-  background-color: #444;
-  border-radius: 5px;
-}
-
-nav .nav-buttons a:hover {
-  background-color: #666;
-}
-
-.container {
-  width: 45%;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   box-sizing: border-box;
 }
 
-/* 아이디, 이메일, 비밀번호 등의 입력창을 동일하게 설정 */
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"] {
-  height: 40px;  /* 높이 통일 */
-  font-size: 1rem;
-  padding: 8px;
+/* 전체 페이지 스타일 */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+  overflow: hidden; /* 스크롤바 제거 */
+  height: 100vh; /* 화면 높이 전체 사용 */
 }
 
-/* 성별 라디오 버튼 스타일 */
-.gender-group {
+
+/* 회원가입 폼 중앙 정렬 및 스타일 */
+form {
+  width: 500px; /* 폼 너비 */
+  margin: 60px auto; /* 중앙 정렬 */
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+/* 회원가입 메시지와 입력창 사이 간격 */
+.container h1 {
+  text-align: center;  /* 중앙 정렬 */
+  margin-bottom: 1px; /* 제목과 입력창 사이 간격 줄임 */
+}
+
+.container form {
+  margin-top: 0; /* 입력창 위쪽의 기본 여백 제거 */
+  padding-top: 1; /* 필요 시 패딩도 제거 */
+}
+
+
+
+/* 입력 필드 스타일 */
+label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 1px;
+  color: #555;
+}
+
+input[type="text"], 
+input[type="password"], 
+input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus {
+  border-color: #0095f6;
+  outline: none;
+}
+
+/* 성별 라디오 버튼 스타일 - 가로 배치 */
+.radio-group {
   display: flex;
-  align-items: center; /* 텍스트와 동그라미 버튼을 중앙에 맞춤 */
-  gap: 50px;  /* 버튼들 간의 간격을 좁힘 */
+  justify-content: center;
+  gap: 20px; /* 버튼 사이 간격 */
+  margin-bottom: 16px;
 }
 
-.gender-group input[type="radio"] {
-  margin-left: 1px; /* 라디오 버튼과 텍스트 간의 간격을 조정 */
-}
-
-.gender-group label {
-  margin-left: 1px; /* 텍스트와 동그라미 간격*/
-}
-
-
-
-/* 버튼 그룹 */
-.button-group {
+.radio-group label {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.submit-btn,
-.login-btn {
-  padding: 10px 15px; /* 버튼 크기 조금 줄여주기 */
-  font-size: 1rem;
-  border-radius: 5px;
+  align-items: center;
+  gap: 5px; /* 라디오 버튼과 텍스트 사이 간격 */
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
   cursor: pointer;
-  width: 45%;  /* 버튼 너비 줄이기 */
 }
 
-.submit-btn {
-  background-color: #333;
+.radio-group input[type="radio"] {
+  margin: 0; /* 기본 마진 제거 */
+  cursor: pointer;
+}
+
+
+/* 버튼 스타일 */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0095f6;
   color: white;
   border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.submit-btn:hover {
-  background-color: #444;
+button:hover {
+  background-color: #0078d4;
 }
 
-.login-btn {
-  background-color: #ddd;
-  color: #333;
-  text-decoration: none;
+/* 로그인 링크 */
+.login-link {
   text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
 }
 
-.login-btn:hover {
-  background-color: #ccc;
+.login-link a {
+  color: #0095f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
 }

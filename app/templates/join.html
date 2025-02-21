@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>회원가입</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/join.css')}}"> 
-</head>
-<body>
-    <nav>
-        <div class="logo">
-        <a href="/">로고</a>
-    </div>
-    <div class="nav-buttons">
-        <a href="/auth/join" class="btn">회원가입</a>
-        <a href="/auth/login" class="btn">로그인</a>
-    </div>    
-    </nav>
-
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/join.css') }}">
+    </head>
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="/">로고</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="/auth/join">회원가입</a>
+                <a href="/auth/login">로그인</a>
+            </div>
+        </nav>
+    
     <div class="container">
         <h1>회원가입</h1>
         <form action="{{ url_for('auth.join') }}" method="POST">
@@ -44,13 +45,11 @@
                 <input type="email" id="email" name="email" required>
             </div>
 
-            <div class="form-group gender-group">
-                <label for="male">성별</label>
-                <label for="male">남</label>
-                <input type="radio" id="male" name="gender" value="male" required>
-                <label for="female">여</label>
-                <input type="radio" id="female" name="gender" value="female" required>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="male"> 남</label>
+                <label><input type="radio" name="gender" value="female"> 여</label>
             </div>
+            
             
             <div class="button-group">
                 <button type="submit" class="submit-btn">회원가입</button>

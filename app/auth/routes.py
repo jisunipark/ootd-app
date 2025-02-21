@@ -53,3 +53,10 @@ def login():
             return '아이디 또는 비밀번호가 잘못되었습니다.', 'error'
 
     return render_template('login.html')
+
+
+@auth.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    session.pop('username', None)
+    return render_template('logout.html')
