@@ -1,57 +1,66 @@
-/* 전체 페이지 스타일 */
-body, html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+/* logout.css */
+
+/* 기본 스타일 */
+body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-/* 메뉴 스타일 */
-nav .nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-nav .nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-nav .nav-links a:hover {
-  background-color: #00bcd4;
-  color: white;
-}
-
-/* 로그아웃 메시지를 중앙에 배치 */
-.page-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 70px);
-}
-
+/* 로그아웃 컨테이너 */
 .logout-container {
+  width: 400px;
+  margin: 100px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
   text-align: center;
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  width: 60%;
-  max-width: 500px;
-  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 로그아웃 메시지 스타일 */
 .logout-container h1 {
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: bold;
   color: #333;
-  margin: 0;
+  margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.logout-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.logout-links a {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+/* 버튼 색상 */
+.logout-links .login-btn {
+  background-color: #0095f6;
+}
+
+.logout-links .login-btn:hover {
+  background-color: #0078d4;
+}
+
+.logout-links .home-btn {
+  background-color: #4caf50;
+}
+
+.logout-links .home-btn:hover {
+  background-color: #388e3c;
 }
