@@ -3,7 +3,7 @@
 
 import os
 from werkzeug.utils import secure_filename
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, current_app
 import requests
 from app import db
 from app.models import Writing, Comment
@@ -19,14 +19,19 @@ URL = f"http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}&
 
 
 # 업로드 디렉토리 설정
-UPLOAD_FOLDER = 'static/uploads'  # 업로드된 파일을 저장할 폴더
+UPLOAD_FOLDER = 'app/static/uploads'  # 업로드된 파일을 저장할 폴더
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}  # 허용할 파일 확장자
 
-main.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-main.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 최대 업로드 파일 크기 16MB
+# 'UPLOAD_FOLDER' 설정을 current_app.config를 사용해서 설정
+@main.before_app_request
+def setup():
+    current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    current_app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 최대 업로드 파일 크기 16MB
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 
 
