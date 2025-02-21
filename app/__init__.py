@@ -6,20 +6,24 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
 # 데이터베이스 경로 설정
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(BASE_DIR, "instance/users.db")}'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'your_secret_key_here'
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    f'sqlite:///{os.path.join(BASE_DIR, "instance/users.db")}'
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.secret_key = "your_secret_key_here"
 
 # 데이터베이스 초기화
 db = SQLAlchemy(app)
 
 # 블루프린트 등록
-from app.auth.routes import auth as auth_blueprint 
+from app.auth.routes import auth as auth_blueprint
 from app.main.routes import main as main_blueprint
+from app.user.routes import user as user_blueprint
 
-app.register_blueprint(auth_blueprint, url_prefix='/auth') # 회원가입/로그인 기능
-app.register_blueprint(main_blueprint) # 메인 페이지 기능
+app.register_blueprint(auth_blueprint, url_prefix="/auth")  # 회원가입/로그인 기능
+app.register_blueprint(main_blueprint)  # 메인 페이지 기능
+app.register_blueprint(user_blueprint)  # 유저 페이지 기능
 
 # 테이블 자동 생성
 with app.app_context():
