@@ -3,21 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>회원가입</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}"> 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/join.css') }}">
     </head>
 
     <body>
-        <!-- 네비게이션 바 -->
-        <nav>
-            <div class="logo">
-                <a href="/">로고</a>
-            </div>
-            <div class="nav-buttons">
-                <a href="/auth/join">회원가입</a>
-                <a href="/auth/login">로그인</a>
-            </div>
-        </nav>
+    <!-- 네비게이션 바 -->
+    <nav>
+        {% include "navbar.html" %}
+    </nav>
     
         <!-- 회원가입 폼 -->
         <div class="container">
