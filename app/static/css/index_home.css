@@ -214,7 +214,7 @@
     text-align: right;
   }
 
-  /* 📌 게시글이 없을 경우 */
+  /* 📌 게시글이 없을 경우 (문구 가운데 정렬) */
   .no-posts {
     text-align: center;
     font-size: 18px;
@@ -222,10 +222,10 @@
     margin-bottom: 15px;
   }
 
-  /* ✍ 글쓰기 버튼 */
+  /* ✍ 글쓰기 버튼 (가운데 정렬) */
   .write-btn {
     display: block;
-    margin: 20px auto;
+    margin: 0 auto; /* 자동으로 가운데 정렬 */
     padding: 12px 20px;
     background-color: #3897f0;
     color: white;
@@ -240,3 +240,10 @@
   .write-btn:hover {
     background-color: #2877c9;
   }
+
+  /* 📌 게시글이 없을 경우 + 버튼 감싸는 컨테이너 */
+  .no-posts-container {
+    text-align: center; /* 내부 요소들 가운데 정렬 */
+    padding: 20px;
+  }
+
