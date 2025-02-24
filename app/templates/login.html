@@ -6,7 +6,9 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/join.css') }}">
     </head>
+
     <body>
+        <!-- 네비게이션 바 -->
         <nav>
             <div class="logo">
                 <a href="/">로고</a>
@@ -17,29 +19,86 @@
             </div>
         </nav>
     
+        <!-- 로그인 폼 -->
+        <div class="container">
+            <h1>로그인</h1>
+            <form action="{{ url_for('auth.login') }}" method="POST">
+                <div class="form-group">
+                    <label for="username">아이디</label>
+                    <input type="text" id="username" name="username" required minlength="7" maxlength="20">
+                </div>
 
-    <div class="container">
-        <h1>로그인</h1>
-        <form action="{{ url_for('auth.login') }}" method="POST">
-            <div class="form-group">
-                <label for="username">아이디</label>
-                <input type="text" id="username" name="username" required minlength="7" maxlength="20">
-            </div>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password" required minlength="7" maxlength="20">
+                </div>
 
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" required minlength="7" maxlength="20">
-            </div>
+                <div class="button-group">
+                    <button type="submit" class="submit-btn">로그인</button>
+                </div>
+                <div class="login-link">
+                    아직 회원이 아니신가요? <a href="/auth/join">회원가입</a>
+                </div>
+            </form>
 
-            <div class="button-group">
-                <button type="submit" class="submit-btn">로그인</button>
-                <a href="/auth/join" class="login-btn">회원가입</a>
-            </div>
-        </form>
+            <div id="errorMessages"></div>
+        </div>
 
-        <div id="errorMessages"></div>
-    </div>
+        <!-- JavaScript: 로그인 성공/실패 메시지 표시 및 페이지 전환 -->
+        <script>
+            // 폼 제출 이벤트 처리
+            document.querySelector('form').addEventListener('submit', async function(event) {
+                event.preventDefault(); // 기본 제출 방지
 
-    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
-</body>
+                const form = event.target;
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: formData
+                    });
+
+                    const data = await response.json(); // JSON 응답 받기
+
+                    if (response.ok) {
+                        showMessage(data.message, "success");
+
+                        // 1초 후 메인 페이지로 이동
+                        setTimeout(() => {
+                            window.location.href = data.redirect;
+                        }, 1000);
+                    } else {
+                        showMessage(data.message, "error");
+                    }
+                } catch (error) {
+                    console.error("오류 발생:", error);
+                    showMessage("서버 오류가 발생했습니다. 다시 시도해주세요.", "error");
+                }
+            });
+
+            // 메시지를 표시하는 함수
+            function showMessage(message, type = "success") {
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = message;
+                messageDiv.style.position = 'fixed';
+                messageDiv.style.top = '20px';
+                messageDiv.style.left = '50%';
+                messageDiv.style.transform = 'translateX(-50%)';
+                messageDiv.style.padding = '15px 20px';
+                messageDiv.style.color = 'white';
+                messageDiv.style.fontSize = '18px';
+                messageDiv.style.borderRadius = '8px';
+                messageDiv.style.zIndex = '1000';
+                messageDiv.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.2)';
+                messageDiv.style.backgroundColor = type === "success" ? '#4CAF50' : '#FF5733'; // 초록: 성공, 빨강: 오류
+                document.body.appendChild(messageDiv);
+
+                // 1초 후 메시지 자동 제거
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 1000);
+            }
+        </script>
+    </body>
 </html>
