@@ -6,7 +6,7 @@
     <title>WeatherFit</title>
     
     <!-- 네비게이션바 css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <!-- 메인 페이지 css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index_home.css') }}">  
 </head>
@@ -14,23 +14,7 @@
 
     <!-- 네비게이션 바 -->
     <nav>
-        <div class="logo">
-            <a href="/">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="WeatherFit 로고" class="logo-img">
-                WeatherFit
-            </a>
-        </div>
-        <div class="nav-buttons">
-            {% if current_user.is_authenticated %}                
-                
-                <a href="/auth/logout"> 로그아웃 </a> 
-                <a href="/writing" class="write-btn">글쓰기</a>
-                <a> 마이페이지 </a>  
-            {% else %}  
-                <a href="/auth/join">회원가입</a>
-                <a href="/auth/login">로그인</a>
-            {% endif%}
-        </div>
+        {% include "navbar.html" %}
     </nav>
     <!--날씨 API 출력-->
     <section>
@@ -55,32 +39,38 @@
     </section>
 
 
-
     <!-- 최근 게시물 섹션 -->
     <section class="recent-posts">
         <h2>오늘의 스타일을 확인해 보세요</h2>
- 
-        {% if writings %}
-        <div class="post-cards">
-            {% for writing in writings %}
-            <div class="post-card">
-                {% if writing.image_url %}
-                <!-- 이미지가 있으면 카드 상단에 표시 -->
-                <img class="post-image" src="{{ url_for('static', filename=writing.image_url.split('static/')[1]) }}" alt="게시물 이미지">
-                {% endif %}
-                <div class="post-info">
-                    <div class="post-date">{{ writing.date }} {{ writing.time }}</div>
-                    <div class="post-tags">{{ writing.tags }}</div>
-                    <p class="post-content">{{ writing.content }}</p>
+
+        <div class="post-grid">
+            {% if writings %}
+                {% for writing in writings %}
+                <div class="post-card">
+                    {% if writing.image_url %}
+                    <!-- 이미지가 있으면 카드 상단에 표시 -->
+                    <img class="post-image" src="{{ url_for('static', filename=writing.image_url.split('static/')[1]) }}" alt="게시물 이미지">
+                    {% endif %}
+                    <div class="post-info">
+                        <div class="post-meta">
+                            <span class="post-date">{{ writing.date }} {{ writing.time }}</span>
+                        </div>
+                        <div class="post-tags">
+                            {% for tag in writing.tags.split(',') %}
+                            <span class="tag">{{ tag.strip() }}</span>
+                            {% endfor %}
+                        </div>
+                        <p class="post-content">{{ writing.content }}</p>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+            <p class="no-posts">오늘 올라온 게시글이 없습니다</p>
+            <a href="/writing" class="write-btn">게시글 작성하기</a>
+            {% endif %}
         </div>
-        {% else %}
-        <p>오늘 올라온 게시글이 없습니다</p>
-        <a href="/writing" class="write-btn">게시글 작성하기</a>
-        {% endif %}
     </section>
+
 
 
 
