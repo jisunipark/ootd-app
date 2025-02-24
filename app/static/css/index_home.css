@@ -1,49 +1,73 @@
-/* 전체 리셋 */
-* {
+  
+  /* 전체 리셋 */
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   /* 기본 폰트 및 배경 */
   body {
     font-family: 'Roboto', sans-serif;
     background-color: #fafafa;
     color: #262626;
     line-height: 1.6;
+    font-size: 16px; /* 기본 폰트 크기 고정 */
   }
-  
-  
+
   /* 날씨 섹션 */
-  section h1 {
-    margin-top: 80px; /* 고정 네비게이션 바로 인한 상단 여백 */
-    padding: 20px;
-    font-size: 1.8rem;
-    text-align: center;
-  }
-  
+  /* ✅ 부모 요소의 폰트 크기 고정 */
   .weather-container {
-    max-width: 600px;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px; /* 🔥 부모 폰트 크기 고정 */
   }
-  
-  .weather-container img {
+
+  /* 날씨 아이콘 스타일 */
+  #weatherIcon {
     width: 100px;
     height: auto;
-    margin-bottom: 10px;
   }
-  
+
+  /* ✅ 온도 & 날씨 상태 크기 동일하게 (px 단위 적용) */
+  #temperature-text {
+    font-size: 64px !important; /* 크기 강제 적용 */
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+  }
+
+    /* ✅ 온도 & 날씨 상태 크기 동일하게 (px 단위 적용) */
+    #description-text {
+      font-size: 40px !important; /* 크기 강제 적용 */
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+    }
+
+  /* 습도 & 바람 스타일 (크기 조정) */
+  #humidity-text, #wind-text {
+    font-size: 18px !important; /* 🔥 고정된 크기 */
+    color: gray;
+  }
+
+  /* ✅ 추가: 다른 곳에서 폰트 크기 덮어쓰지 않도록 보호 */
+  .weather-container * {
+    font-size: inherit !important; /* 부모 폰트 크기 유지 */
+  }
+
+    
   /* 추천 룩 섹션 */
   section h2 {
     padding: 20px;
     font-size: 1.5rem;
-    text-align: center;
+    /*text-align: center;*/
   }
   
   .outfit-list {
@@ -67,11 +91,22 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
   
-  .outfit-item .tags p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #555;
+  .tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px 10px;
+    margin: 6px;
+    border-radius: 10px;
+    font-size: 1.2em;   
+    font-weight: bold;   /* 글씨 굵게 */
   }
+
+  .outfit-item .tags {
+    text-align: center;     /* 태그들을 가운데 정렬 */
+    margin-bottom: 15px;      /* 태그와 이미지 사이에 여백 추가 */
+  }
+
   
   .outfit-item .images {
     display: flex;
@@ -95,52 +130,113 @@
   }
   
   /* 최근 게시물 섹션 */
-  section a {
-    display: inline-block;
-    margin: 20px;
-    padding: 10px 20px;
-    background-color: #3897f0;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  section ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    list-style: none;
+  /* 🏞️ 최근 게시물 섹션 */
+  .recent-posts {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  section ul li {
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    padding: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  
-  /* 반응형 디자인 */
-  @media (max-width: 768px) {
-    nav {
-      flex-direction: column;
-      padding: 10px;
-    }
-    
-    nav .nav-buttons a {
-      margin: 10px 0;
-    }
-    
-    section h1, section h2 {
-      font-size: 1.4rem;
-    }
-    
-    .outfit-list,
-    section ul {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
   }
 
+  /* 📌 게시물 카드 그리드 */
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 반응형 */
+    gap: 20px;
+    justify-content: center; /* 중앙 정렬 */
+    padding: 20px 0;
+  }
+
+  /* 🃏 개별 카드 스타일 (크기 고정) */
+  .post-card {
+    width: 300px; /* 카드 너비 고정 */
+    height: 400px; /* 카드 높이 고정 */
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card:hover {
+    transform: scale(1.02);
+  }
+
+  /* 📷 게시물 이미지 */
+  .post-image {
+    width: 100%;
+    height: 270px; /* 이미지 높이 고정 */
+    object-fit: cover; /* 이미지 비율 유지 */
+  }
+
+  /* 📌 카드 안의 내용 (고정된 높이 유지) */
+  .post-info {
+    flex-grow: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* 🔖 태그 스타일 */
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+
+  .tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  /* 📝 게시물 내용 */
+  .post-content {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* 📅 게시 날짜 */
+  .post-meta {
+    font-size: 12px;
+    color: gray;
+    text-align: right;
+  }
+
+  /* 📌 게시글이 없을 경우 */
+  .no-posts {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  /* ✍ 글쓰기 버튼 */
+  .write-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #3897f0;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+    width: 200px;
+    transition: background 0.3s;
+  }
+
+  .write-btn:hover {
+    background-color: #2877c9;
+  }

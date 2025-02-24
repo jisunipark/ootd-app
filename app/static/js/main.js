@@ -93,10 +93,14 @@ if (selectedData) {
     let tagDiv = document.createElement("div");
     tagDiv.classList.add("tags"); // 'tags' 클래스를 추가해서 스타일을 적용
 
-    // 추천 태그들을 표시할 p 태그 생성
-    let tagTitle = document.createElement("p");
-    tagTitle.textContent = selectedData.tags.join(" "); // 선택된 태그들을 콤마로 구분하여 텍스트로 표시
-    tagDiv.appendChild(tagTitle); // p 태그를 tagDiv 안에 추가
+    // 개선된 방식: 각 태그를 개별 <span> 요소로 생성
+    selectedData.tags.forEach(tag => {
+        let tagSpan = document.createElement("span");
+        tagSpan.classList.add("tag");  // CSS에서 이 클래스에 원하는 스타일을 적용
+        tagSpan.textContent = tag;
+        tagDiv.appendChild(tagSpan);
+    });
+
 
     // 태그 영역 div를 전체 outfit div에 추가
     div.appendChild(tagDiv);
