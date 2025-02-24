@@ -65,8 +65,10 @@
                 </div>
                 {% endfor %}
             {% else %}
-            <p class="no-posts">오늘 올라온 게시글이 없습니다</p>
-            <a href="/writing" class="write-btn">게시글 작성하기</a>
+            <div class="no-posts-container">
+                <p class="no-posts">오늘 올라온 게시글이 없습니다</p>
+                <a href="/writing" class="write-btn">게시글 작성하기</a>
+            </div>
             {% endif %}
         </div>
     </section>
