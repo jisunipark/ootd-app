@@ -40,94 +40,44 @@
         </div>
     </section>
     
-    <!--추천 옷차림 출력-->
+    <!-- 추천 룩 출력 부분 (이미지는 자바스크립트로 추가됨) -->
     <section>
         <h2>추천하는 룩</h2>
-        <!-- 추천 태그 출력 --> 
-        <ul class="outfit-list" id="outfitList">
-            <!--자바스크립트로 동적으로 추천 룩 표시-->
-        </ul>
+        <div class="outfit-list" id="outfitList" data-static-url="{{ url_for('static', filename='') }}">
+            <!-- 추천 룩은 자바스크립트로 동적으로 추가됩니다 -->
+        </div>
     </section>
 
-    <!-- 최근 게시물 출력 -->
-    <section>
+
+
+    <!-- 최근 게시물 섹션 -->
+    <section class="recent-posts">
         <h2>최근 게시물</h2>
-        <a href="/writing"> 글쓰기 </a>
+        <a href="/writing" class="write-btn">글쓰기</a>
         {% if writings %}
-        <ul>
+        <div class="post-cards">
             {% for writing in writings %}
-            <li>
-                <strong>{{ writing.tags }}</strong>
-                {{ writing.content }}
-            </li>
+            <div class="post-card">
+                {% if writing.image_url %}
+                <!-- 이미지가 있으면 카드 상단에 표시 -->
+                <img class="post-image" src="{{ url_for('static', filename=writing.image_url.split('static/')[1]) }}" alt="게시물 이미지">
+                {% endif %}
+                <div class="post-info">
+                    <div class="post-date">{{ writing.date }} {{ writing.time }}</div>
+                    <div class="post-tags">{{ writing.tags }}</div>
+                    <p class="post-content">{{ writing.content }}</p>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
         {% else %}
-            <p>아직 게시물이 없습니다.</p>
+        <p>아직 게시물이 없습니다.</p>
         {% endif %}
     </section>
 
 
+
     <!-- 자바스크립트 -->
-    <script>
-        //10초마다 날씨 데이터 자동 업데이트하는 함수
-        async function updateWeather(){
-            console.log("⏳ updateWeather() 실행됨!");
-
-            try{
-                let response = await fetch(window.location.href);
-                let text = await response.text();
-
-                let parser = new DOMParser();
-                let newDoc = parser.parseFromString(text, "text/html");
-
-                document.getElementById("weatherIcon").src = newDoc.getElementById("weatherIcon").src;
-                document.getElementById("temperature").innerText = newDoc.getElementById("temperature").innerText;
-                document.getElementById("humidity").innerText = newDoc.getElementById("humidity").innerText;
-                document.getElementById("wind").innerText = newDoc.getElementById("wind").innerText;
-                document.getElementById("description").innerText = newDoc.getElementById("description").innerText;
-
-                console.log("✅ 업데이트 완료! 새로운 온도:", newDoc.getElementById("temperature").innerText);            
-            } catch (error) {
-                console.error("❌ 업데이트 중 오류 발생:",error);
-            }
-        }
-
-        setInterval(updateWeather, 10000);
-
-    function recommendOutfit(){
-        let temperature = parseFloat(document.getElementById("temperature").innerText);
-
-        let outfit = '';
-
-        if (temperature >= 28) {
-            outfit = ["#민소매 반팔","#반바지","#짧은 치마","#린넨 옷"];
-        } else if (temperature <= 27 && temperature >= 23) {
-            outfit = ["#반팔","#얇은 셔츠","#반바지","#면바지"];
-        } else if (temperature <= 22 && temperature >= 20) {
-            outfit = ["#블라우스","#긴팔 티","#면바지","#슬랙스"];
-        } else if (temperature <= 19 && temperature >= 17) {
-            outfit = ["#얇은 가디건","#얇은 니트","#맨투맨","#후드","#긴바지"];
-        } else if (temperature <= 16 && temperature >= 12) {
-            outfit = ["#자켓","#가디건","#청자켓","#니트","#스타킹","#청바지"];
-        } else if (temperature <= 11 && temperature >= 9) {
-            outfit = ["#트랜치 코트","#야상","#점퍼","#스타킹","#기모바지"];
-        } else if (temperature <= 5 && temperature >= 5) {
-            outfit = ["#울 코트","#히트텍","#가죽 옷","#기모"];
-        } else {
-            outfit = ["#패딩","#두꺼운 코트","#누빔 옷","#기모","#목도리"];
-        }
-
-        let listElement = document.getElementById("outfitList")
-
-        outfit.forEach (item => {
-            let li = document.createElement("li");
-            li.textContent = item;
-            listElement.appendChild(li);
-        });
-    }
-
-        window.onload = recommendOutfit;
-    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
