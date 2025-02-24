@@ -13,6 +13,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "your_secret_key_here"
 
+
+# 파일 업로드 경로 설정
+app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
+
 # 데이터베이스 초기화
 db = SQLAlchemy(app)
 

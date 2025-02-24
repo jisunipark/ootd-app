@@ -3,3 +3,4 @@ __pycache__/
 *.pyo
 
 /instance/users.db
+.DS_Store

@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-    <title>로그아웃</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
+  <meta charset="UTF-8">
+  <title>로그아웃</title>
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <!-- 로그아웃 CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="/">로고</a>
-        </div>
-        <div class="nav-buttons">
-            {% if session.get('user_id') %}
-                <a href="{{ url_for('auth.logout') }}">로그아웃</a>
-            {% else %}
-                <a href="{{ url_for('auth.join') }}">회원가입</a>
-                <a href="{{ url_for('auth.login') }}">로그인</a>
-            {% endif %}
-        </div>
-    </nav>
+  <nav>
+    <div class="logo">
+      <a href="/">로고</a>
+    </div>
+    <div class="nav-buttons">
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('auth.logout') }}">로그아웃</a>
+      {% else %}
+        <a href="{{ url_for('auth.join') }}">회원가입</a>
+        <a href="{{ url_for('auth.login') }}">로그인</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- **전역 래퍼**: 모든 콘텐츠를 감싸고 폭 제한을 적용 -->
   <div class="page-wrapper">
     <div class="logout-container">
-        <h1>로그아웃되었습니다.</h1>
+      <h1>로그아웃되었습니다.</h1>
     </div>
   </div>
 </body>
