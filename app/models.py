@@ -19,12 +19,21 @@ class Writing(db.Model):
     time = db.Column(db.String(5), nullable=False)  # 시간 (HH:MM)
     content = db.Column(db.Text)
     image_url = db.Column(db.String(200))
-    tags = db.Column(db.String(200))
+    tags = db.Column(db.String(200)) 
+
 
     comments = db.relationship('Comment', lazy=True)
 
     def __repr__(self):
         return f"<Writing {self.id}>"
+    
+    # tags를 리스트로 변환하는 메소드
+    def get_tags(self):
+        return self.tags.split(",") if self.tags else []
+
+    # tags 리스트를 문자열로 변환하는 메소드
+    def set_tags(self, tags_list):
+        self.tags = ",".join(tags_list)
 
 
 
