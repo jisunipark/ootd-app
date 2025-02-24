@@ -1,0 +1,27 @@
+section {
+  margin: 40px auto;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section {
+  display: flex;
+  margin-top: 40px;
+  padding-left: 40px;
+  gap: 36px;
+}
+
+.profile-section h3 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 140%; /* 33.6px */
+}
+
+.profile-img {
+  width: 166px;
+  height: 166px;
+  border-radius: 999px;
+}

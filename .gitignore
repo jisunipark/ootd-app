@@ -2,6 +2,5 @@ __pycache__/
 *.pyc
 *.pyo
 
-
 /instance/users.db
 .DS_Store

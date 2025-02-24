@@ -8,6 +8,7 @@ import requests
 from app import db
 from app.models import Writing, Comment
 from datetime import datetime
+from flask_login import current_user
 
 # 블루프린트 객체 생성
 main = Blueprint('main',__name__)
@@ -116,6 +117,7 @@ def writing():
 
         # 새로운 글 객체 생성
         new_writing = Writing(
+            user_id = current_user.id,
             date=date,
             time=time,
             content=content,

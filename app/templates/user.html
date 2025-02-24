@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>user 페이지</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <a href="/">로고</a>
+      </div>
+      <div class="nav-buttons">
+        <a href="/auth/join">회원가입</a>
+        <a href="/auth/login">로그인</a>
+      </div>
+    </nav>
+    <section class="profile-section">
+      <img
+        src="{{ user.profile_img_url }}"
+        alt="프로필이미지"
+        class="profile-img"
+      />
+      <div>
+        <h3>{{ user.username }}</h3>
+        <span>{{ user.bio }}</span>
+      </div>
+    </section>
+    <!-- 최근 게시물 섹션 -->
+    <section class="recent-posts">
+      <h2>최근 게시물</h2>
+      <a href="/writing" class="write-btn">글쓰기</a>
+      {% if writings %}
+      <div class="post-cards">
+        {% for writing in writings %}
+        <div class="post-card">
+          {% if writing.image_url %}
+          <!-- 이미지가 있으면 카드 상단에 표시 -->
+          <img
+            class="post-image"
+            src="{{ url_for('static', filename=writing.image_url.split('static/')[1]) }}"
+            alt="게시물 이미지"
+          />
+          {% endif %}
+          <div class="post-info">
+            <div class="post-date">{{ writing.date }} {{ writing.time }}</div>
+            <div class="post-tags">{{ writing.tags }}</div>
+            <p class="post-content">{{ writing.content }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>아직 게시물이 없습니다.</p>
+      {% endif %}
+    </section>
+  </body>
+</html>
