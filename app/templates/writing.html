@@ -45,7 +45,7 @@
       <p>
         <strong>tag:</strong>
         {% for tag in writing.get_tags() %}
-          <span>#{{ tag }} </span>
+          <span>{{ tag }} </span>
         {% endfor %}
       </p>
 
@@ -61,9 +61,6 @@
         <li>{{ comment.content }}</li>
         {% endfor %}
       </ul>
-
-      <a href="/writing/update/{{ writing.id }}">update</a>
-      <a href="/writing/delete/{{ writing.id }}">delete</a>
 
       {% else %}
 
