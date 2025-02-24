@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <p style="text-align: right">
+    <p style="text-align: right; margin-right: 40px;">
       <a href="/">main</a>
     </p>
 
@@ -26,12 +26,24 @@
       </span>
       <span>
         <h4 style="float: right">
-          <span>{{ writing.weather }}</span>&nbsp;&nbsp;<span
-            >{{ writing.date }}</span
+          <span>{{ writing.date }}</span
           >&nbsp;&nbsp;<span>{{ writing.time }}</span>
         </h4>
       </span>
-
+      
+      <!-- 날씨 정보 표시 -->
+      {% if weather_info['error'] %}
+      <p style="color: red;">{{ weather_info['error'] }}</p>
+    {% else %}
+      <div class="weather-info">
+        <span>⏰ 현재 날씨: {{ weather_info['description'] }}</span>&nbsp;
+        <span>🌡️ 온도: {{ weather_info['temperature'] }}°C</span>&nbsp;
+        <span>💧 습도: {{ weather_info['humidity'] }}%</span>&nbsp;
+        <span>💨 바람: {{ weather_info['wind'] }}m/s</span>&nbsp;
+        <span>📍 위치: {{ weather_info['city'] }}</span>
+      </div>
+      {% endif %}
+      
       <p>{{ writing.content }}</p>
 
       {% if writing.image_url %}
@@ -68,22 +80,28 @@
 
       <!-- 새 글 작성 폼을 보여주는 부분 -->
       <h1>Make My OOTD</h1>
-        
+
         <br />
 
     <!-- 날씨 정보 표시 -->
+    {% if weather_info['error'] %}
+    <p style="color: red;">{{ weather_info['error'] }}</p>
+    {% else %}
       <div class="weather-info">
         <span>현재 날씨: {{ weather_info['description'] }}</span>&nbsp;
-        <span>온도: {{ weather_info['temperature'] }}°C</span>&nbsp;
-        <span>습도: {{ weather_info['humidity'] }}%</span>&nbsp;
-        <span>바람: {{ weather_info['wind'] }}m/s</span>&nbsp;
-        <span>위치: {{ weather_info['city'] }}</span>
+        <span>🌡️ 온도: {{ weather_info['temperature'] }}°C</span>&nbsp;
+        <span>💧 습도: {{ weather_info['humidity'] }}%</span>&nbsp;
+        <span>💨 바람: {{ weather_info['wind'] }}m/s</span>&nbsp;
+        <span>📍 위치: {{ weather_info['city'] }}</span>
       </div>
-        
+      {% endif %}
       <br />
+
       <form method="POST" enctype="multipart/form-data">
         <label for="content">content</label><br />
-        <textarea id="content" name="content" required></textarea><br /><br />
+        <textarea id="content" name="content" required></textarea>
+        
+        <br /><br />
 
         <label for="image_url">image</label><br />
         <input
@@ -99,6 +117,7 @@
         <button type="submit" style="text-align: center">save</button>
       </form>
       {% endif %}
+
     </div>
 
 </html>
