@@ -20,38 +20,37 @@
       {% if writing %}
       <!-- 작성된 글을 보여주는 부분 -->
       <span>
-        <h2 style="display: inline-block; margin-right: 40px">
+        <h3 style="display: inline-block; margin-right: 40px">
           {{ writing.id }}'s OOTD
-        </h2>
+        </h3>
       </span>
       <span>
         <h4 style="float: right">
-          <span>{{ writing.weather }}</span><span>{{ writing.date }}</span
-          ><span>{{ writing.time }}</span>
+          <span>{{ writing.weather }}</span>&nbsp;&nbsp;<span
+            >{{ writing.date }}</span
+          >&nbsp;&nbsp;<span>{{ writing.time }}</span>
         </h4>
       </span>
 
       <p>{{ writing.content }}</p>
 
       {% if writing.image_url %}
-      <!-- 이미지 URL이 있는 경우 이미지 표시 -->
       <img
         src="{{ url_for('static', filename='uploads/' + writing.image_url.split('/')[-1]) }}"
         alt="게시글 이미지"
         width="500"
       />
       {% endif %}
-      <br /><br />
 
       <p>
         <strong>tag:</strong>
-        {% for tag in writing.tags %}
-        <span>#{{ tag }} </span>
+        {% for tag in writing.get_tags() %}
+          <span>#{{ tag }} </span>
         {% endfor %}
       </p>
 
       <br /><br />
-      <h3>shout out to {{ writing.id }}'s OOTD</h3>
+      <h3>Shout out to {{ writing.id }}'s OOTD</h3>
       <form action="/post/{{ writing.id }}/comment" method="POST">
         <textarea name="content" required></textarea><br />
         <button type="submit">comment</button>
@@ -63,34 +62,46 @@
         {% endfor %}
       </ul>
 
-      <a href="/writing/update/{{ writing.id }}">수정</a>
-      <a href="/writing/delete/{{ writing.id }}">삭제</a>
+      <a href="/writing/update/{{ writing.id }}">update</a>
+      <a href="/writing/delete/{{ writing.id }}">delete</a>
 
       {% else %}
+
+
+
       <!-- 새 글 작성 폼을 보여주는 부분 -->
       <h1>Make My OOTD</h1>
-      <form method="POST">
-        <label for="weather">weather</label><br />
-        <input
-          type="text"
-          id="weather"
-          name="weather"
-          value="{{ weather_info['description'] if weather_info['description'] else '' }}"
-          required
-        /><br /><br />
+        
+        <br />
 
+    <!-- 날씨 정보 표시 -->
+      <div class="weather-info">
+        <span>현재 날씨: {{ weather_info['description'] }}</span>&nbsp;
+        <span>온도: {{ weather_info['temperature'] }}°C</span>&nbsp;
+        <span>습도: {{ weather_info['humidity'] }}%</span>&nbsp;
+        <span>바람: {{ weather_info['wind'] }}m/s</span>&nbsp;
+        <span>위치: {{ weather_info['city'] }}</span>
+      </div>
+        
+      <br />
+      <form method="POST" enctype="multipart/form-data">
         <label for="content">content</label><br />
         <textarea id="content" name="content" required></textarea><br /><br />
 
         <label for="image_url">image</label><br />
-        <input type="file" id="image_url" name="image_url" /><br /><br />
+        <input
+          type="file"
+          id="image_url"
+          name="image_url"
+          
+        /><br /><br />
 
         <label for="tags">tag</label><br />
-        <input type="text" id="tags" name="tags" /><br /><br />
+        <input type="text" id="tags" name="tags" placeholder="태그를 입력하세요"/><br /><br />
 
-        <button type="submit">save</button>
+        <button type="submit" style="text-align: center">save</button>
       </form>
       {% endif %}
     </div>
-  </body>
+
 </html>

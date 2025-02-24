@@ -19,7 +19,7 @@ URL = f"http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}&
 
 
 # 업로드 디렉토리 설정
-UPLOAD_FOLDER = 'app/static/uploads'  # 업로드된 파일을 저장할 폴더
+UPLOAD_FOLDER = 'app/static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}  # 허용할 파일 확장자
 
 # 'UPLOAD_FOLDER' 설정을 current_app.config를 사용해서 설정
@@ -91,10 +91,11 @@ def writing():
 
     if request.method == "POST":
         # 사용자가 입력한 데이터를 가져옵니다.
-        weather = request.form["weather"]
+        
         content = request.form["content"]
         image_url = ""
-        tags = request.form.get("tags", "")
+        tags = request.form.get("tags", "").split(",")  # 쉼표로 구분된 태그를 리스트로 변환
+
 
         # 이미지 파일 처리
         if 'image_url' in request.files:
@@ -115,13 +116,12 @@ def writing():
 
         # 새로운 글 객체 생성
         new_writing = Writing(
-            weather=weather,
             date=date,
             time=time,
             content=content,
             image_url=image_url,
-            tags=tags
         )
+        new_writing.set_tags(tags)  # 리스트를 문자열로 변환하여 저장
 
         # 데이터베이스에 저장
         db.session.add(new_writing)
