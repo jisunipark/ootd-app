@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, render_template, request, url_for, jsonify, send_from_directory
 from flask_login import login_user, logout_user, login_required
 from app.models import User
-from app import db
+from app import db, app
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
@@ -16,12 +16,14 @@ def join():
         email = request.form['email']
         gender = request.form['gender']
         password = generate_password_hash(request.form['password'])
+        profile_img_url = '/static/images/default-profile.png'
+        bio = f"안녕하세요, {nickname}입니다."
 
         # 이메일 중복 확인
         if User.query.filter_by(email=email).first():
             return jsonify({"message": "이미 사용 중인 이메일입니다.", "status": "error"}), 400
 
-        new_user = User(name=name, nickname=nickname, username=username, password=password, email=email, gender=gender)
+        new_user = User(name=name, nickname=nickname, username=username, password=password, email=email, gender=gender, profile_img_url=profile_img_url, bio=bio)
 
         try:
             db.session.add(new_user)

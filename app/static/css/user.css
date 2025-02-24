@@ -7,13 +7,6 @@ section {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-h2 {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #262626;
-}
-
 .profile-section {
   display: flex;
   margin-top: 40px;
@@ -21,7 +14,14 @@ h2 {
   gap: 36px;
 }
 
+.profile-section h3 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 140%; /* 33.6px */
+}
+
 .profile-img {
-  width: 200px;
-  height: 200px;
+  width: 166px;
+  height: 166px;
+  border-radius: 999px;
 }

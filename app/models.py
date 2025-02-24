@@ -11,6 +11,8 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
     gender = db.Column(db.String(10), nullable=False)
+    profile_img_url = db.Column(db.String(200))
+    bio = db.Column(db.String(1000), nullable=True)
 
     # Flask-Login의 user_loader 사용 시 객체 식별에 사용됨
     def get_id(self):

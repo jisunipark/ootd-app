@@ -24,11 +24,14 @@
       </div>
     </nav>
     <section class="profile-section">
-      <img src="{{ url_for('static', filename="images/profile01.png") }}"
-      alt="프로필이미지" class="profile-img"/>
+      <img
+        src="{{ user.profile_img_url }}"
+        alt="프로필이미지"
+        class="profile-img"
+      />
       <div>
-        <h2>{{ username }}</h2>
-        <span>@username</span>
+        <h3>{{ user.username }}</h3>
+        <span>{{ user.bio }}</span>
       </div>
     </section>
     <!-- 최근 게시물 섹션 -->
