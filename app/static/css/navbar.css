@@ -1,0 +1,76 @@
+/* 네비게이션 바 스타일 */
+nav {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px; /* 좌우 패딩 */
+  display: flex;
+  justify-content: space-between; /* 로고와 버튼을 양쪽 끝으로 정렬 */
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 65px; /* 네비게이션 바 높이 고정 */
+}
+
+/* 로고 스타일 */
+.logo {
+  display: flex;
+  align-items: center; /* 수직 정렬 */
+}
+
+/* 로고 이미지 */
+.logo-img {
+  width: 50px; /* 로고 크기 고정 */
+  height: auto;
+  margin-right: 10px; /* 로고와 텍스트 사이 간격 */
+}
+
+/* 로고 텍스트 */
+nav .logo a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 24px; /* 고정된 폰트 크기 */
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+nav .logo a:hover {
+  color: #00bcd4;
+}
+
+/* 네비게이션 버튼 (회원가입, 로그인) 오른쪽 정렬 */
+nav .nav-buttons {
+  display: flex;
+  gap: 15px;
+  margin-left: auto; /* 오른쪽 정렬 */
+}
+
+/* 네비게이션 버튼 스타일 */
+nav .nav-buttons a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px; /* 폰트 크기 고정 */
+  font-weight: 500;
+  padding: 10px 14px; /* 버튼 크기 균일하게 설정 */
+  border-radius: 5px;
+  background-color: #444;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav .nav-buttons a:hover {
+  background-color: #666;
+}
+
+/* 모든 페이지에서 동일한 크기를 유지하도록 설정 */
+* {
+  box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 계산 */
+  margin: 0;
+  padding: 0;
+  font-size: 16px; /* 기본 폰트 크기를 px로 고정 */
+  font-family: Arial, sans-serif; /* 모든 페이지에서 동일한 폰트 적용 */
+}
