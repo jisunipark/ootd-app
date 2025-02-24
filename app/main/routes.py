@@ -136,7 +136,27 @@ def writing():
 @main.route("/writing/<int:writing_id>")
 def show_writing(writing_id):
     writing = Writing.query.get_or_404(writing_id)
-    return render_template("writing.html", writing=writing)
+
+    # 날씨 정보 가져오기
+    weather_info = {}  # 날씨 정보를 저장할 딕셔너리
+
+    try:
+        response = requests.get(URL)
+        data = response.json()
+
+        if response.status_code == 200 and "main" in data:
+            weather_info = {
+                "temperature": data["main"].get("temp", "N/A"),
+                "description": data["weather"][0].get("description", "N/A"),
+                "city": data.get("name", "알 수 없음"),
+                "icon": data["weather"][0].get("icon", "N/A"),
+            }
+        else:
+            weather_info["error"] = f"❌ API 오류: {data.get('message', '알 수 없음')}"
+    except Exception as e:
+        weather_info["error"] = f"🚨 API 요청 중 오류 발생: {e}"
+
+    return render_template("writing.html", writing=writing, weather_info=weather_info)
 
 # 댓글 추가 라우트
 @main.route("/writing/<int:writing_id>/comment", methods=["POST"])
