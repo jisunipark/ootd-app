@@ -46,7 +46,7 @@
         <div class="post-grid">
             {% if writings %}
                 {% for writing in writings %}
-                <div class="post-card">
+                <a href="{{url_for('main.show_writing',writing_id=writing.id)}}" class="post-card">
                     {% if writing.image_url %}
                     <!-- 이미지가 있으면 카드 상단에 표시 -->
                     <img class="post-image" src="{{ url_for('static', filename=writing.image_url.split('static/')[1]) }}" alt="게시물 이미지">
@@ -57,12 +57,12 @@
                         </div>
                         <div class="post-tags">
                             {% for tag in writing.tags.split(',') %}
-                            <span class="tag">{{ tag.strip() }}</span>
+                            <span class="post-tag">{{ tag.strip() }}</span>
                             {% endfor %}
                         </div>
                         <p class="post-content">{{ writing.content }}</p>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             {% else %}
             <div class="no-posts-container">
