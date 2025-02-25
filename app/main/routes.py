@@ -33,7 +33,14 @@ def setup():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
+# 날씨 API 응답 처리 시, 도시명 한글로 설정
+city_name_map = {
+    'Banpobondong': '방배동',
+    'Seoul': '서울',
+    'Busan': '부산',
+    'Daegu': '대구',
+    # 필요에 따라 다른 도시도 추가
+}
 
 
 
@@ -79,10 +86,16 @@ def writing():
         data = response.json()
 
         if response.status_code == 200 and "main" in data:
+            # 원본 도시명 가져오기
+            city = data.get("name", "알 수 없음")
+            
+            # 도시명 한글로 변환
+            city = city_name_map.get(city, city)  # 변환할 수 없는 경우 원래 도시명 그대로 사용
+
             weather_info = {
                 "temperature": data["main"].get("temp", "N/A"),
                 "description": data["weather"][0].get("description", "N/A"),
-                "city": data.get("name", "알 수 없음"),
+                "city": city,  # 변환된 한글 도시명
                 "icon": data["weather"][0].get("icon", "N/A"),
             }
         else:

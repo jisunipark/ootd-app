@@ -14,6 +14,7 @@ a {
 }
 
 .writing {
+  width: 80%; /* 전체 너비의 80%로 설정 */
   text-align: left;
   max-width: 600px;
   background: #fff;
@@ -24,7 +25,6 @@ a {
 }
 
 h2 {
-  text-align: left;
   font-size: 24px;
   font-weight: bold;
 }
@@ -62,6 +62,8 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+  display: block;
+  margin: 0 auto; /* 버튼 가운데 정렬 */
 }
 
 button:hover {
@@ -96,5 +98,64 @@ input[type="file"] {
 @media (max-width: 768px) {
   .writing {
     width: 90%;
+  }
+}
+
+.weather-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center; /* 가로로 중앙 정렬 */
+  align-items: center; /* 세로로 중앙 정렬 */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 아이콘과 텍스트 사이에 여백을 추가 */
+}
+
+.weather-icon img {
+  width: 50px;
+  height: 50px;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.weather-description {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.weather-temperature {
+  font-size: 18px;
+  color: #ff6b6b;
+}
+
+.weather-humidity,
+.weather-wind,
+.weather-location {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .weather-card {
+    padding: 15px;
+  }
+  .weather-icon img {
+    width: 40px;
+    height: 40px;
   }
 }
