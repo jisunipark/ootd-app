@@ -6,42 +6,39 @@
     <title>user 페이지</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/index.css') }}"
+      href="{{ url_for('static', filename='css/navbar.css') }}"
     />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/user.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index_home.css') }}"
+    />
   </head>
   <body>
-    <nav>
-      <div class="logo">
-        <a href="/">로고</a>
-      </div>
-      <div class="nav-buttons">
-        <a href="/auth/join">회원가입</a>
-        <a href="/auth/login">로그인</a>
-      </div>
-    </nav>
+    <nav>{% include "navbar.html" %}</nav>
     <section class="profile-section">
       <img
         src="{{ user.profile_img_url }}"
         alt="프로필이미지"
         class="profile-img"
       />
-      <div>
+      <div class="profile-section-info">
         <h3>{{ user.username }}</h3>
         <span>{{ user.bio }}</span>
       </div>
     </section>
-    <!-- 최근 게시물 섹션 -->
     <section class="recent-posts">
-      <h2>최근 게시물</h2>
-      <a href="/writing" class="write-btn">글쓰기</a>
-      {% if writings %}
-      <div class="post-cards">
-        {% for writing in writings %}
-        <div class="post-card">
+      <h2>오늘의 스타일을 확인해 보세요</h2>
+      <div class="post-grid">
+        {% if writings %} {% for writing in writings %}
+        <a
+          class="post-card"
+          id="post-{{writing.id}}"
+          href="writing/{{writing.id}}"
+        >
           {% if writing.image_url %}
           <!-- 이미지가 있으면 카드 상단에 표시 -->
           <img
@@ -51,16 +48,26 @@
           />
           {% endif %}
           <div class="post-info">
-            <div class="post-date">{{ writing.date }} {{ writing.time }}</div>
-            <div class="post-tags">{{ writing.tags }}</div>
+            <div class="post-meta">
+              <span class="post-date"
+                >{{ writing.date }} {{ writing.time }}</span
+              >
+            </div>
+            <div class="post-tags">
+              {% for tag in writing.tags.split(',') %}
+              <span class="tag">{{ tag.strip() }}</span>
+              {% endfor %}
+            </div>
             <p class="post-content">{{ writing.content }}</p>
           </div>
+        </a>
+        {% endfor %} {% else %}
+        <div class="no-posts-container">
+          <p class="no-posts">오늘 올라온 게시글이 없습니다</p>
+          <a href="/writing" class="write-btn">게시글 작성하기</a>
         </div>
-        {% endfor %}
+        {% endif %}
       </div>
-      {% else %}
-      <p>아직 게시물이 없습니다.</p>
-      {% endif %}
     </section>
   </body>
 </html>
