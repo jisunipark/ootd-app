@@ -15,6 +15,17 @@
     font-size: 16px; /* 기본 폰트 크기 고정 */
   }
 
+  /* h2 태그 공통 스타일 */
+  h2 {
+    margin: 0;
+    text-align: left; /* 왼쪽 정렬 */
+    margin-left: 20px; /* 왼쪽 여백 추가 */
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    padding-bottom: 10px;
+  }
+
   /* 날씨 섹션 */
   /* ✅ 부모 요소의 폰트 크기 고정 */
   .weather-container {
@@ -98,7 +109,7 @@
     padding: 5px 10px;
     margin: 6px;
     border-radius: 10px;
-    font-size: 1.2em;   
+    font-size: 18px !important;   
     font-weight: bold;   /* 글씨 굵게 */
   }
 
@@ -187,13 +198,13 @@
     margin-bottom: 8px;
   }
 
-  .tag {
+  .post-tag {
     display: inline-block;
     background-color: #f0f0f0;
     color: #333;
     padding: 5px 10px;
     border-radius: 15px;
-    font-size: 12px;
+    font-size: 12px !important;
     font-weight: bold;
   }
 
