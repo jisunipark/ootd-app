@@ -7,11 +7,20 @@ section {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+a {
+  text-decoration: none;
+}
+
 .profile-section {
   display: flex;
+  align-items: center;
   margin-top: 40px;
   padding-left: 40px;
-  gap: 36px;
+  gap: 40px;
+}
+
+.profile-section-info {
+  gap: 16px;
 }
 
 .profile-section h3 {
