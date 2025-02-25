@@ -8,7 +8,7 @@ import requests
 from app import db
 from app.models import Writing, Comment
 from datetime import datetime
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 # 블루프린트 객체 생성
 main = Blueprint('main',__name__)
@@ -78,6 +78,10 @@ def index(): #메인 페이지 렌더링하는 함수
 
 # 글 작성 라우트
 @main.route("/writing", methods=["GET", "POST"])
+
+@main.route("/writing", methods=["GET","POST"])
+@login_required #로그인한 사용자만 접근 가능
+
 def writing():
     weather_info = {}  # 날씨 정보를 저장할 딕셔너리
 
