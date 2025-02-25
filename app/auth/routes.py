@@ -30,7 +30,7 @@ def join():
             db.session.commit()
 
             # 회원가입 완료 시 바로 로그인
-            login_user(new_user)
+            #login_user(new_user)
 
             return jsonify({"message": "회원가입 되었습니다", "redirect": url_for('auth.login'), "status": "success"}), 200
 
