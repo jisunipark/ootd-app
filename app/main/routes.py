@@ -77,7 +77,6 @@ def index(): #메인 페이지 렌더링하는 함수
 
 
 # 글 작성 라우트
-@main.route("/writing", methods=["GET", "POST"])
 
 @main.route("/writing", methods=["GET","POST"])
 @login_required #로그인한 사용자만 접근 가능
